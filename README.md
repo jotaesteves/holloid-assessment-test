@@ -2,6 +2,8 @@
 
 A modern, responsive React dashboard for monitoring and controlling delivery robots. Built with React, TypeScript, Vite, and Chakra UI.
 
+![Robot Fleet Dashboard](./screenshot.png)
+
 ## Features
 
 - **Real-time Robot Monitoring**: View robot status, battery levels, and current deliveries
