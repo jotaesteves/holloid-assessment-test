@@ -1,8 +1,10 @@
+export type RobotStatus = "On Delivery" | "Idle" | "Charging" | "Error" | "Returning";
+
 export interface Robot {
   robotId: string;
-  name: string; // Added name property
+  name: string;
   model: string;
-  status: "On Delivery" | "Idle" | "Charging" | "Error" | "Returning";
+  status: RobotStatus;
   batteryLevel: number;
   location: {
     latitude: number;
@@ -15,11 +17,10 @@ export interface Robot {
     estimatedDelivery: string;
   };
 }
-
 export const sampleRobots: Robot[] = [
   {
     robotId: "R2D1",
-    name: "Robo-1", // Added name
+    name: "Robo-1",
     model: "V2",
     status: "On Delivery",
     batteryLevel: 34,
@@ -36,7 +37,7 @@ export const sampleRobots: Robot[] = [
   },
   {
     robotId: "R2D2",
-    name: "Robo-2", // Added name
+    name: "Robo-2",
     model: "V2",
     status: "Idle",
     batteryLevel: 87,
@@ -53,7 +54,7 @@ export const sampleRobots: Robot[] = [
   },
   {
     robotId: "R1D3",
-    name: "Robo-3", // Added name
+    name: "Robo-3",
     model: "V1",
     status: "On Delivery",
     batteryLevel: 19,
