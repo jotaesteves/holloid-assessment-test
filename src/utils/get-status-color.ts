@@ -4,7 +4,6 @@ export const getStatusColor = (status: Robot["status"]) => {
   switch (status) {
     case "Idle":
       return {
-        colorScheme: "green",
         bg: "green.100",
         bgDark: "green.800",
         color: "green.800",
@@ -12,7 +11,6 @@ export const getStatusColor = (status: Robot["status"]) => {
       };
     case "On Delivery":
       return {
-        colorScheme: "blue",
         bg: "blue.100",
         bgDark: "blue.800",
         color: "blue.800",
@@ -20,7 +18,6 @@ export const getStatusColor = (status: Robot["status"]) => {
       };
     case "Returning":
       return {
-        colorScheme: "orange",
         bg: "orange.100",
         bgDark: "orange.800",
         color: "orange.800",
@@ -28,7 +25,6 @@ export const getStatusColor = (status: Robot["status"]) => {
       };
     case "Charging":
       return {
-        colorScheme: "purple",
         bg: "purple.100",
         bgDark: "purple.800",
         color: "purple.800",
@@ -36,7 +32,6 @@ export const getStatusColor = (status: Robot["status"]) => {
       };
     case "Error":
       return {
-        colorScheme: "red",
         bg: "red.100",
         bgDark: "red.800",
         color: "red.800",
@@ -44,7 +39,6 @@ export const getStatusColor = (status: Robot["status"]) => {
       };
     default:
       return {
-        colorScheme: "gray",
         bg: "gray.100",
         bgDark: "gray.700",
         color: "gray.800",
