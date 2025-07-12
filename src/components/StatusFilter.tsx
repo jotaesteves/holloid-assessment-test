@@ -28,9 +28,6 @@ const StatusFilter: React.FC<StatusFilterProps> = ({ selectedFilter, onFilterCha
           Filter by Status:
         </Text>
         <Box>
-          <label htmlFor="statusFilter" style={{ display: "block", marginBottom: "8px", fontWeight: "semibold" }}>
-            Filter by Status:
-          </label>
           <select
             id="statusFilter"
             value={selectedFilter}

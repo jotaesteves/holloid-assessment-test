@@ -46,3 +46,22 @@ export const getStatusColor = (status: Robot["status"]) => {
       };
   }
 };
+
+export const getBatteryColor = (batteryLevel: number) => {
+  if (batteryLevel > 50) {
+    return {
+      light: "green.400",
+      dark: "green.300",
+    };
+  }
+  if (batteryLevel > 30) {
+    return {
+      light: "yellow.400",
+      dark: "yellow.300",
+    };
+  }
+  return {
+    light: "red.400",
+    dark: "red.300",
+  };
+};

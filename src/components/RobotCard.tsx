@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Heading, Text, Badge } from "@chakra-ui/react";
 import type { Robot, RobotStatus } from "../types/robot";
-import { getStatusColor } from "../utils/get-status-color";
+import { getStatusColor, getBatteryColor } from "../utils/get-colors";
 import { useRobotContext } from "../contexts/RobotContext";
 import DeliveryDetails from "./DeliveryDetails";
 import StatusIndicator from "./StatusIndicator";
@@ -18,24 +18,6 @@ const changeRobotStatus = (status: RobotStatus) => {
 
 const RobotCard = ({ robot }: RobotCardProps) => {
   const { updateBatteryLevel, returnRobotToBase, updateRobotStatus } = useRobotContext();
-  const getBatteryColor = (batteryLevel: number) => {
-    if (batteryLevel > 50) {
-      return {
-        light: "green.400",
-        dark: "green.300",
-      };
-    }
-    if (batteryLevel > 30) {
-      return {
-        light: "yellow.400",
-        dark: "yellow.300",
-      };
-    }
-    return {
-      light: "red.400",
-      dark: "red.300",
-    };
-  };
 
   // Determine if button should be active and get appropriate label
   const canReturnToBase = robot.status === "Idle" || robot.status === "On Delivery";
