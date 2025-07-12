@@ -1,0 +1,79 @@
+/* Theme CSS Variables */
+:root {
+  --chakra-colors-bg: #ffffff;
+  --chakra-colors-text: #1a202c;
+  --chakra-colors-card-bg: rgba(255, 255, 255, 0.8);
+  --chakra-colors-input-bg: #ffffff;
+  --chakra-colors-border-color: #cbd5e0;
+  --chakra-colors-gray-100: #f7fafc;
+  --chakra-colors-gray-200: #edf2f7;
+  --chakra-colors-gray-300: #e2e8f0;
+  --chakra-colors-gray-600: #718096;
+  --chakra-colors-gray-700: #4a5568;
+  --chakra-colors-gray-800: #2d3748;
+  --chakra-colors-gray-900: #1a202c;
+}
+
+html.dark,
+[data-theme="dark"] {
+  --chakra-colors-bg: #1a202c;
+  --chakra-colors-text: #ffffff;
+  --chakra-colors-card-bg: #2d3748;
+  --chakra-colors-input-bg: #2d3748;
+  --chakra-colors-border-color: #4a5568;
+  --chakra-colors-gray-100: #2d3748;
+  --chakra-colors-gray-200: #4a5568;
+  --chakra-colors-gray-300: #718096;
+  --chakra-colors-gray-600: #cbd5e0;
+  --chakra-colors-gray-700: #e2e8f0;
+  --chakra-colors-gray-800: #edf2f7;
+  --chakra-colors-gray-900: #f7fafc;
+}
+
+/* Global body styles */
+body {
+  background-color: var(--chakra-colors-bg) !important;
+  color: var(--chakra-colors-text) !important;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Theme-aware component styles */
+.theme-card {
+  background-color: var(--chakra-colors-card-bg) !important;
+  border: 1px solid var(--chakra-colors-border-color) !important;
+}
+
+.theme-input {
+  background-color: var(--chakra-colors-input-bg) !important;
+  border: 1px solid var(--chakra-colors-border-color) !important;
+  color: var(--chakra-colors-text) !important;
+}
+
+.theme-input::placeholder {
+  color: var(--chakra-colors-gray-600) !important;
+}
+
+.theme-text {
+  color: var(--chakra-colors-text) !important;
+}
+
+.theme-text-secondary {
+  color: var(--chakra-colors-gray-600) !important;
+}
+
+/* Dark theme specific background gradients */
+html.dark .app-background,
+[data-theme="dark"] .app-background {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 25%, #1e1e1e 50%, #2a2a2a 100%) !important;
+}
+
+html.light .app-background,
+[data-theme="light"] .app-background,
+.app-background {
+  background: linear-gradient(135deg, #e2e2e2 0%, #dbdbdb 25%, #eeeeee 50%, #e1e1e1 100%) !important;
+}
+
+/* Force theme updates on all elements */
+* {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease !important;
+}

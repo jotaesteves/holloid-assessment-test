@@ -6,7 +6,7 @@ interface RobotContextType {
   updateBatteryLevel: (robotId: string, newLevel: number) => void;
   returnRobotToBase: (robotId: string) => void;
   setRobots: (robots: Robot[]) => void;
-  updateRobotStatus?: (robotId: string, newStatus: RobotStatus) => void;
+  updateRobotStatus: (robotId: string, newStatus: RobotStatus) => void;
 }
 
 const RobotContext = createContext<RobotContextType | undefined>(undefined);

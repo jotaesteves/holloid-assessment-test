@@ -2,6 +2,7 @@ import { Box, Container, Grid, Heading, Text, Button, Flex, HStack, Input } from
 import RobotCard from "./components/RobotCard";
 import StatusFilter from "./components/StatusFilter";
 import { NameOrStatusFilter } from "./components/NameOrStatusFilter";
+import { ThemeToggle } from "./components/ThemeToggle";
 import { sampleRobots } from "./types/robot";
 import type { Robot, RobotStatus } from "./types/robot";
 import { RobotProvider, useRobotContext } from "./contexts/RobotContext";
@@ -89,8 +90,9 @@ const Dashboard = () => {
   return (
     <Box
       minH="100vh"
-      bg="linear-gradient(135deg, #e2e2e2 0%, #dbdbdb 25%, #eeeeee 50%, #e1e1e1 100%)"
-      color="gray.800"
+      bg="gray.50"
+      color="gray.900"
+      _dark={{ bg: "gray.900", color: "white" }}
       position="relative"
       _before={{
         content: '""',
@@ -99,8 +101,11 @@ const Dashboard = () => {
         left: 0,
         right: 0,
         bottom: 0,
-        background:
-          "radial-gradient(circle at 20% 80%, rgba(147, 196, 253, 0.154) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(195, 181, 253, 0.171) 0%, transparent 50%), radial-gradient(circle at 40% 40%, rgba(165, 180, 252, 0.178) 0%, transparent 50%)",
+        background: {
+          base: "radial-gradient(circle at 20% 80%, rgba(147, 196, 253, 0.154) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(195, 181, 253, 0.171) 0%, transparent 50%), radial-gradient(circle at 40% 40%, rgba(165, 180, 252, 0.178) 0%, transparent 50%)",
+          _dark:
+            "radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%), radial-gradient(circle at 40% 40%, rgba(99, 102, 241, 0.1) 0%, transparent 50%)",
+        },
         zIndex: 0,
       }}
     >
@@ -113,14 +118,15 @@ const Dashboard = () => {
           gap={4}
         >
           <Box textAlign={{ base: "center", md: "left" }}>
-            <Heading as="h1" size={{ base: "xl", md: "2xl" }} mb={2} fontWeight="bold" color="black">
+            <Heading as="h1" size={{ base: "xl", md: "2xl" }} mb={2} fontWeight="bold">
               Robot Fleet Dashboard
             </Heading>
-            <Text fontSize={{ base: "md", md: "lg" }} color="gray.800">
+            <Text fontSize={{ base: "md", md: "lg" }} color="gray.600" _dark={{ color: "gray.400" }}>
               Monitor and control your delivery robots
             </Text>
           </Box>
           <HStack gap={2} justify={{ base: "center", md: "flex-end" }} width={{ base: "full", md: "auto" }}>
+            <ThemeToggle />
             <Button
               onClick={handleAddRobot}
               colorScheme="green"
@@ -159,8 +165,7 @@ const Dashboard = () => {
               width={{ base: "full", md: "300px" }}
               size="md"
               bg="white"
-              borderColor="gray.300"
-              _hover={{ borderColor: "gray.400" }}
+              _dark={{ bg: "gray.800" }}
               _focus={{ borderColor: "blue.500", boxShadow: "0 0 0 1px #3182ce" }}
             />
           )}

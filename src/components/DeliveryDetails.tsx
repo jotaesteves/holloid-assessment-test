@@ -17,30 +17,38 @@ const DeliveryDetails = ({ robot }: DeliveryDetailsProps) => {
   if (robot.status !== "On Delivery") return null;
 
   return (
-    <Box mb={4} p={3} bg="blue.50" borderRadius="md" border="1px solid" borderColor="blue.200">
-      <Text fontSize="sm" fontWeight="bold" color="blue.800" mb={2}>
+    <Box
+      mb={4}
+      p={3}
+      bg="blue.50"
+      borderRadius="md"
+      border="1px solid"
+      borderColor="blue.200"
+      _dark={{ bg: "blue.900", borderColor: "blue.600" }}
+    >
+      <Text fontSize="sm" fontWeight="bold" color="blue.800" _dark={{ color: "blue.200" }} mb={2}>
         Current Delivery
       </Text>
       <Flex>
         <Box>
-          <Text color="gray.700" fontSize="sm" mb={1}>
+          <Text color="gray.700" _dark={{ color: "gray.300" }} fontSize="sm" mb={1}>
             Order ID:
           </Text>
-          <Text color="gray.700" fontSize="sm" mb={1}>
+          <Text color="gray.700" _dark={{ color: "gray.300" }} fontSize="sm" mb={1}>
             ETA:
           </Text>
-          <Text color="gray.700" fontSize="sm">
+          <Text color="gray.700" _dark={{ color: "gray.300" }} fontSize="sm">
             Address:
           </Text>
         </Box>
         <Box ml={4}>
-          <Text fontWeight="medium" color="gray.800" fontSize="sm" mb={1}>
+          <Text fontWeight="medium" color="gray.800" _dark={{ color: "gray.100" }} fontSize="sm" mb={1}>
             {robot.currentOrder.orderId}
           </Text>
-          <Text fontWeight="medium" color="gray.800" fontSize="sm" mb={1}>
+          <Text fontWeight="medium" color="gray.800" _dark={{ color: "gray.100" }} fontSize="sm" mb={1}>
             {formatETA(robot.currentOrder.estimatedDelivery)}
           </Text>
-          <Text fontWeight="medium" color="gray.800" fontSize="sm">
+          <Text fontWeight="medium" color="gray.800" _dark={{ color: "gray.100" }} fontSize="sm">
             {robot.currentOrder.deliveryAddress}
           </Text>
         </Box>

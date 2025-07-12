@@ -18,7 +18,13 @@ const StatusFilter: React.FC<StatusFilterProps> = ({ selectedFilter, onFilterCha
         justify={{ base: "center", md: "flex-end" }}
         gap={4}
       >
-        <Text fontSize="lg" fontWeight="semibold" color="gray.700" textAlign={{ base: "center", md: "right" }}>
+        <Text
+          fontSize="lg"
+          fontWeight="semibold"
+          color="gray.900"
+          _dark={{ color: "white" }}
+          textAlign={{ base: "center", md: "right" }}
+        >
           Filter by Status:
         </Text>
         <Box>
@@ -29,18 +35,19 @@ const StatusFilter: React.FC<StatusFilterProps> = ({ selectedFilter, onFilterCha
               width: "200px",
               padding: "8px 12px",
               fontSize: "16px",
-              border: "1px solid #cbd5e0",
               borderRadius: "6px",
-              backgroundColor: "white",
               cursor: "pointer",
               outline: "none",
+              backgroundColor: "white",
+              border: "1px solid #E2E8F0",
+              color: "#1A202C",
             }}
             onFocus={(e) => {
               e.target.style.borderColor = "#3182ce";
               e.target.style.boxShadow = "0 0 0 1px #3182ce";
             }}
             onBlur={(e) => {
-              e.target.style.borderColor = "#cbd5e0";
+              e.target.style.borderColor = "#E2E8F0";
               e.target.style.boxShadow = "none";
             }}
           >

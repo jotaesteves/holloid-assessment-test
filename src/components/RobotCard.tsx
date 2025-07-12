@@ -19,9 +19,22 @@ const changeRobotStatus = (status: RobotStatus) => {
 const RobotCard = ({ robot }: RobotCardProps) => {
   const { updateBatteryLevel, returnRobotToBase, updateRobotStatus } = useRobotContext();
   const getBatteryColor = (batteryLevel: number) => {
-    if (batteryLevel > 70) return "green.500";
-    if (batteryLevel > 30) return "yellow.500";
-    return "red.500";
+    if (batteryLevel > 50) {
+      return {
+        light: "green.400",
+        dark: "green.300",
+      };
+    }
+    if (batteryLevel > 30) {
+      return {
+        light: "yellow.400",
+        dark: "yellow.300",
+      };
+    }
+    return {
+      light: "red.400",
+      dark: "red.300",
+    };
   };
 
   // Determine if button should be active and get appropriate label
@@ -47,7 +60,8 @@ const RobotCard = ({ robot }: RobotCardProps) => {
 
   return (
     <Box
-      bg="whiteAlpha.800"
+      bg="white"
+      _dark={{ bg: "gray.800" }}
       backdropFilter="blur(10px)"
       borderRadius="xl"
       boxShadow="lg"
@@ -67,16 +81,20 @@ const RobotCard = ({ robot }: RobotCardProps) => {
         {/* Robot ID, Model, and Status */}
         <Flex justify="space-between" align="flex-start" mb={4}>
           <Box>
-            <Heading as="h2" size="lg" color="gray.800" mb={1}>
+            <Heading as="h2" size="lg" color="gray.900" _dark={{ color: "white" }} mb={1}>
               {robot.robotId} – {robot.name}
             </Heading>
-            <Text fontSize="md" color="gray.600" fontWeight="medium">
+            <Text fontSize="md" color="gray.600" _dark={{ color: "gray.400" }} fontWeight="medium">
               Model: {robot.model}
             </Text>
           </Box>
           <Badge
             bg={getStatusColor(robot.status).bg}
             color={getStatusColor(robot.status).color}
+            _dark={{
+              bg: getStatusColor(robot.status).bgDark,
+              color: getStatusColor(robot.status).colorDark,
+            }}
             fontSize="xs"
             px={3}
             py={1}
@@ -111,7 +129,7 @@ const RobotCard = ({ robot }: RobotCardProps) => {
       {/* Battery Level Indicator */}
       <Box mb={4}>
         <Flex align="center" justify="space-between" mb={2}>
-          <Text fontSize="sm" fontWeight="medium" color="gray.600">
+          <Text fontSize="sm" fontWeight="medium" color="gray.600" _dark={{ color: "gray.400" }}>
             Battery Level
           </Text>
           <Flex align="center">
@@ -126,7 +144,14 @@ const RobotCard = ({ robot }: RobotCardProps) => {
             >
               -
             </Button>
-            <Text fontSize="sm" color="gray.500" fontWeight="bold" minW="32px" textAlign="center">
+            <Text
+              fontSize="sm"
+              color="gray.600"
+              _dark={{ color: "gray.400" }}
+              fontWeight="bold"
+              minW="32px"
+              textAlign="center"
+            >
               {robot.batteryLevel}%
             </Text>
             <Button
@@ -147,6 +172,7 @@ const RobotCard = ({ robot }: RobotCardProps) => {
             width="100%"
             height="8px"
             bg="gray.200"
+            _dark={{ bg: "gray.600" }}
             borderRadius="full"
             overflow="hidden"
             role="progressbar"
@@ -158,7 +184,8 @@ const RobotCard = ({ robot }: RobotCardProps) => {
             <Box
               width={`${robot.batteryLevel}%`}
               height="100%"
-              bg={getBatteryColor(robot.batteryLevel)}
+              bg={getBatteryColor(robot.batteryLevel).light}
+              _dark={{ bg: getBatteryColor(robot.batteryLevel).dark }}
               borderRadius="full"
               transition="width 0.3s"
             />

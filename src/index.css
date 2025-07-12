@@ -1,1 +1,16 @@
-/* CSS Reset and global styles are now handled by Chakra UI */
+@import "tailwindcss";
+
+/* Custom CSS to ensure Chakra UI works properly */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+}
