@@ -90,9 +90,9 @@ const Dashboard = () => {
   return (
     <Box
       minH="100vh"
-      bg="gray.50"
+      bg="gray.100"
       color="gray.900"
-      _dark={{ bg: "gray.900", color: "white" }}
+      _dark={{ bg: "gray.800", color: "white" }}
       position="relative"
       _before={{
         content: '""',
@@ -102,9 +102,9 @@ const Dashboard = () => {
         right: 0,
         bottom: 0,
         background: {
-          base: "radial-gradient(circle at 20% 80%, rgba(147, 196, 253, 0.154) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(195, 181, 253, 0.171) 0%, transparent 50%), radial-gradient(circle at 40% 40%, rgba(165, 180, 252, 0.178) 0%, transparent 50%)",
+          base: "radial-gradient(circle at 20% 80%, rgba(147, 196, 253, 0.10) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(195, 181, 253, 0.12) 0%, transparent 50%), radial-gradient(circle at 40% 40%, rgba(165, 180, 252, 0.13) 0%, transparent 50%)",
           _dark:
-            "radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%), radial-gradient(circle at 40% 40%, rgba(99, 102, 241, 0.1) 0%, transparent 50%)",
+            "radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.07) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.07) 0%, transparent 50%), radial-gradient(circle at 40% 40%, rgba(99, 102, 241, 0.07) 0%, transparent 50%)",
         },
         zIndex: 0,
       }}
