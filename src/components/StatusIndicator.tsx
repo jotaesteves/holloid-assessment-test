@@ -52,7 +52,7 @@ const StatusIndicator = ({ status }: StatusIndicatorProps) => {
           title: "Charging",
           titleColor: "purple.800",
           titleColorDark: "purple.200",
-          description: "Replenishing battery power",
+          description: "Battery recharging in progress",
           descriptionColor: "purple.600",
           descriptionColorDark: "purple.300",
         };
@@ -68,9 +68,25 @@ const StatusIndicator = ({ status }: StatusIndicatorProps) => {
           title: "Returning to Base",
           titleColor: "orange.800",
           titleColorDark: "orange.200",
-          description: "Navigating back to station",
+          description: "Heading back to charging station",
           descriptionColor: "orange.600",
           descriptionColorDark: "orange.300",
+        };
+      case "On Delivery":
+        return {
+          bg: "blue.50",
+          bgDark: "blue.900",
+          borderColor: "blue.200",
+          borderColorDark: "blue.600",
+          icon: "🚚",
+          iconColor: "blue.600",
+          iconColorDark: "blue.300",
+          title: "On Delivery",
+          titleColor: "blue.800",
+          titleColorDark: "blue.200",
+          description: "Delivering order to customer",
+          descriptionColor: "blue.600",
+          descriptionColorDark: "blue.300",
         };
       default:
         return null;
