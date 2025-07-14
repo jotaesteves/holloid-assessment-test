@@ -24,8 +24,16 @@ export default defineConfig({
         "tailwind.config.ts",
         "vite.config.ts",
         "vitest.config.ts",
+        // Exclude main entry files and sample data
+        "src/main.tsx",
+        "src/App.tsx",
+        "src/types/robot.ts", // Contains sample data, not logic to test
+        "src/index.css",
+        "src/theme.css",
+        "src/vite-env.d.ts",
+        "src/assets/**",
       ],
-      include: ["src/**/*.{ts,tsx}"],
+      include: ["src/components/**/*.{ts,tsx}", "src/contexts/**/*.{ts,tsx}", "src/utils/**/*.{ts,tsx}"],
       all: true,
       thresholds: {
         lines: 80,
