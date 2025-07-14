@@ -1,7 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent } from "../../test/utils/test-utils";
 import StatusFilter from "../StatusFilter";
-import type { RobotStatus } from "../../types/robot";
 
 const mockRobotCounts = {
   All: 10,

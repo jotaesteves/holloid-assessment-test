@@ -1,5 +1,5 @@
-import React, { ReactElement } from "react";
-import { render, RenderOptions } from "@testing-library/react";
+import React, { type ReactElement } from "react";
+import { render, type RenderOptions } from "@testing-library/react";
 import { ChakraProvider, defaultSystem } from "@chakra-ui/react";
 import { RobotProvider } from "../../contexts/RobotContext";
 

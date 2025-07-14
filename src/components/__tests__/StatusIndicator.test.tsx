@@ -1,7 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "../../test/utils/test-utils";
 import StatusIndicator from "../StatusIndicator";
-import type { RobotStatus } from "../../types/robot";
 
 describe("StatusIndicator", () => {
   it("renders idle status correctly", () => {
