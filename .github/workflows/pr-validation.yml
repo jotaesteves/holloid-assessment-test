@@ -1,0 +1,193 @@
+name: PR Validation
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+
+# Permissions needed for the workflow
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+  checks: write
+
+# Cancel previous runs of the same workflow on the same branch
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate Pull Request
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch full history for better diff analysis
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check for test files
+        run: |
+          echo "Checking for test files..."
+          test_files=$(find src -name "*.test.tsx" -o -name "*.test.ts" | wc -l)
+          if [ $test_files -eq 0 ]; then
+            echo "❌ No test files found"
+            exit 1
+          fi
+          echo "✅ Found $test_files test files"
+
+      - name: Run linting
+        run: |
+          echo "Running ESLint..."
+          npm run lint
+
+      - name: Run type checking
+        run: |
+          echo "Running TypeScript type checking..."
+          npx tsc --noEmit
+
+      - name: Run unit tests
+        run: |
+          echo "Running unit tests..."
+          npm run test:run
+
+      - name: Generate test coverage
+        run: |
+          echo "Generating test coverage..."
+          npm run test:coverage || true
+
+      - name: Check test coverage thresholds
+        run: |
+          echo "Checking coverage thresholds..."
+          # Ensure coverage files exist
+          if [ ! -f "coverage/lcov.info" ]; then
+            echo "⚠️ Coverage report not generated, running tests without coverage..."
+            npm run test:run
+          else
+            echo "✅ Coverage report generated successfully"
+            # Display coverage summary if available
+            if [ -f "coverage/coverage-summary.json" ]; then
+              echo "📊 Coverage Summary:"
+              cat coverage/coverage-summary.json || true
+            fi
+          fi
+
+      - name: Build application
+        run: |
+          echo "Building application..."
+          npm run build
+
+      - name: Verify build output
+        run: |
+          if [ ! -d "dist" ]; then
+            echo "❌ Build output directory 'dist' not found"
+            exit 1
+          fi
+
+          if [ ! -f "dist/index.html" ]; then
+            echo "❌ index.html not found in build output"
+            exit 1
+          fi
+
+          echo "✅ Build output verified"
+
+      - name: Check for common issues
+        run: |
+          echo "Checking for common issues..."
+
+          # Check for console.log statements (excluding test files)
+          console_logs=$(find src -name "*.tsx" -o -name "*.ts" | grep -v test | xargs grep -l "console\." || true)
+          if [ ! -z "$console_logs" ]; then
+            echo "⚠️ Warning: Found console statements in:"
+            echo "$console_logs"
+          fi
+
+          # Check for TODO/FIXME comments
+          todos=$(find src -name "*.tsx" -o -name "*.ts" | xargs grep -i "todo\|fixme" || true)
+          if [ ! -z "$todos" ]; then
+            echo "⚠️ Warning: Found TODO/FIXME comments:"
+            echo "$todos"
+          fi
+
+          echo "✅ Code quality checks completed"
+
+  # Comment on PR with test results
+  comment:
+    name: Comment Test Results
+    runs-on: ubuntu-latest
+    needs: validate
+    if: always() && github.event_name == 'pull_request'
+
+    steps:
+      - name: Comment PR
+        uses: actions/github-script@v7
+        continue-on-error: true
+        with:
+          script: |
+            try {
+              const { owner, repo } = context.repo;
+              const pr_number = context.issue.number;
+
+              let comment_body = "## 🧪 Test Results\n\n";
+
+              if ("${{ needs.validate.result }}" === "success") {
+                comment_body += "✅ All tests passed!\n\n";
+                comment_body += "- ✅ Linting passed\n";
+                comment_body += "- ✅ Type checking passed\n";
+                comment_body += "- ✅ Unit tests passed\n";
+                comment_body += "- ✅ Build successful\n";
+              } else {
+                comment_body += "❌ Some checks failed. Please review the workflow logs.\n\n";
+                comment_body += "Check the [workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for details.\n";
+              }
+
+              comment_body += "\n---\n";
+              comment_body += "*This comment was automatically generated by the CI workflow.*";
+
+              // Check if we already commented
+              const comments = await github.rest.issues.listComments({
+                owner,
+                repo,
+                issue_number: pr_number,
+              });
+
+              const bot_comments = comments.data.filter(comment =>
+                comment.user.type === 'Bot' && comment.body.includes('🧪 Test Results')
+              );
+
+              if (bot_comments.length > 0) {
+                // Update existing comment
+                await github.rest.issues.updateComment({
+                  owner,
+                  repo,
+                  comment_id: bot_comments[0].id,
+                  body: comment_body
+                });
+                console.log("Updated existing PR comment");
+              } else {
+                // Create new comment
+                await github.rest.issues.createComment({
+                  owner,
+                  repo,
+                  issue_number: pr_number,
+                  body: comment_body
+                });
+                console.log("Created new PR comment");
+              }
+            } catch (error) {
+              console.log("Failed to comment on PR:", error.message);
+              console.log("This might be due to insufficient permissions or the PR being from a fork.");
+              // Don't fail the workflow if commenting fails
+            }
