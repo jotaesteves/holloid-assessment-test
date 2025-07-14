@@ -17,7 +17,7 @@ describe("ThemeToggle", () => {
   beforeEach(() => {
     // Reset mocks
     vi.clearAllMocks();
-    
+
     // Mock localStorage
     Object.defineProperty(window, "localStorage", {
       value: localStorageMock,
@@ -87,7 +87,7 @@ describe("ThemeToggle", () => {
     render(<ThemeToggle />);
 
     const button = screen.getByRole("button", { name: /toggle color mode/i });
-    
+
     // Initial state should be light
     expect(document.documentElement.classList.contains("light")).toBe(true);
 
@@ -105,7 +105,7 @@ describe("ThemeToggle", () => {
     render(<ThemeToggle />);
 
     const button = screen.getByRole("button", { name: /toggle color mode/i });
-    
+
     // Initial state should be dark
     expect(document.documentElement.classList.contains("dark")).toBe(true);
 
@@ -146,7 +146,7 @@ describe("ThemeToggle", () => {
     render(<ThemeToggle />);
 
     const button = screen.getByRole("button", { name: /toggle color mode/i });
-    
+
     // Should start with light class
     expect(document.documentElement.classList.contains("light")).toBe(true);
     expect(document.documentElement.classList.contains("dark")).toBe(false);

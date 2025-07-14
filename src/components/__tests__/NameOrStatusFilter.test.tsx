@@ -10,24 +10,14 @@ describe("NameOrStatusFilter", () => {
   });
 
   it("renders both name and status filter buttons", () => {
-    render(
-      <NameOrStatusFilter 
-        selectedFilter="name" 
-        onFilterChange={mockOnFilterChange} 
-      />
-    );
+    render(<NameOrStatusFilter selectedFilter="name" onFilterChange={mockOnFilterChange} />);
 
     expect(screen.getByRole("button", { name: "Name" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Status" })).toBeInTheDocument();
   });
 
   it("highlights the selected filter button - name selected", () => {
-    render(
-      <NameOrStatusFilter 
-        selectedFilter="name" 
-        onFilterChange={mockOnFilterChange} 
-      />
-    );
+    render(<NameOrStatusFilter selectedFilter="name" onFilterChange={mockOnFilterChange} />);
 
     const nameButton = screen.getByRole("button", { name: "Name" });
     const statusButton = screen.getByRole("button", { name: "Status" });
@@ -38,12 +28,7 @@ describe("NameOrStatusFilter", () => {
   });
 
   it("highlights the selected filter button - status selected", () => {
-    render(
-      <NameOrStatusFilter 
-        selectedFilter="status" 
-        onFilterChange={mockOnFilterChange} 
-      />
-    );
+    render(<NameOrStatusFilter selectedFilter="status" onFilterChange={mockOnFilterChange} />);
 
     const nameButton = screen.getByRole("button", { name: "Name" });
     const statusButton = screen.getByRole("button", { name: "Status" });
@@ -53,12 +38,7 @@ describe("NameOrStatusFilter", () => {
   });
 
   it("calls onFilterChange with 'name' when name button is clicked", () => {
-    render(
-      <NameOrStatusFilter 
-        selectedFilter="status" 
-        onFilterChange={mockOnFilterChange} 
-      />
-    );
+    render(<NameOrStatusFilter selectedFilter="status" onFilterChange={mockOnFilterChange} />);
 
     const nameButton = screen.getByRole("button", { name: "Name" });
     fireEvent.click(nameButton);
@@ -68,12 +48,7 @@ describe("NameOrStatusFilter", () => {
   });
 
   it("calls onFilterChange with 'status' when status button is clicked", () => {
-    render(
-      <NameOrStatusFilter 
-        selectedFilter="name" 
-        onFilterChange={mockOnFilterChange} 
-      />
-    );
+    render(<NameOrStatusFilter selectedFilter="name" onFilterChange={mockOnFilterChange} />);
 
     const statusButton = screen.getByRole("button", { name: "Status" });
     fireEvent.click(statusButton);
@@ -83,12 +58,7 @@ describe("NameOrStatusFilter", () => {
   });
 
   it("does not call onFilterChange when already selected button is clicked", () => {
-    render(
-      <NameOrStatusFilter 
-        selectedFilter="name" 
-        onFilterChange={mockOnFilterChange} 
-      />
-    );
+    render(<NameOrStatusFilter selectedFilter="name" onFilterChange={mockOnFilterChange} />);
 
     const nameButton = screen.getByRole("button", { name: "Name" });
     fireEvent.click(nameButton);
@@ -99,12 +69,7 @@ describe("NameOrStatusFilter", () => {
   });
 
   it("renders buttons with correct structure and styling", () => {
-    const { container } = render(
-      <NameOrStatusFilter 
-        selectedFilter="name" 
-        onFilterChange={mockOnFilterChange} 
-      />
-    );
+    const { container } = render(<NameOrStatusFilter selectedFilter="name" onFilterChange={mockOnFilterChange} />);
 
     // Check that buttons are in an HStack
     const hstack = container.querySelector('[class*="css-"]');
@@ -112,19 +77,14 @@ describe("NameOrStatusFilter", () => {
 
     const buttons = screen.getAllByRole("button");
     expect(buttons).toHaveLength(2);
-    
+
     // Both buttons should be present
     expect(buttons[0]).toHaveTextContent("Name");
     expect(buttons[1]).toHaveTextContent("Status");
   });
 
   it("handles rapid clicks correctly", () => {
-    render(
-      <NameOrStatusFilter 
-        selectedFilter="name" 
-        onFilterChange={mockOnFilterChange} 
-      />
-    );
+    render(<NameOrStatusFilter selectedFilter="name" onFilterChange={mockOnFilterChange} />);
 
     const statusButton = screen.getByRole("button", { name: "Status" });
     const nameButton = screen.getByRole("button", { name: "Name" });
@@ -141,12 +101,7 @@ describe("NameOrStatusFilter", () => {
   });
 
   it("maintains accessibility for keyboard navigation", () => {
-    render(
-      <NameOrStatusFilter 
-        selectedFilter="name" 
-        onFilterChange={mockOnFilterChange} 
-      />
-    );
+    render(<NameOrStatusFilter selectedFilter="name" onFilterChange={mockOnFilterChange} />);
 
     const nameButton = screen.getByRole("button", { name: "Name" });
     const statusButton = screen.getByRole("button", { name: "Status" });
@@ -160,12 +115,7 @@ describe("NameOrStatusFilter", () => {
   });
 
   it("buttons are accessible via keyboard navigation", () => {
-    render(
-      <NameOrStatusFilter 
-        selectedFilter="name" 
-        onFilterChange={mockOnFilterChange} 
-      />
-    );
+    render(<NameOrStatusFilter selectedFilter="name" onFilterChange={mockOnFilterChange} />);
 
     const nameButton = screen.getByRole("button", { name: "Name" });
     const statusButton = screen.getByRole("button", { name: "Status" });
@@ -173,7 +123,7 @@ describe("NameOrStatusFilter", () => {
     // Buttons should be focusable and have proper tab order
     expect(nameButton).toBeInTheDocument();
     expect(statusButton).toBeInTheDocument();
-    
+
     // Focus should work
     nameButton.focus();
     expect(document.activeElement).toBe(nameButton);
@@ -183,12 +133,7 @@ describe("NameOrStatusFilter", () => {
   });
 
   it("maintains proper button semantics for screen readers", () => {
-    render(
-      <NameOrStatusFilter 
-        selectedFilter="status" 
-        onFilterChange={mockOnFilterChange} 
-      />
-    );
+    render(<NameOrStatusFilter selectedFilter="status" onFilterChange={mockOnFilterChange} />);
 
     const nameButton = screen.getByRole("button", { name: "Name" });
     const statusButton = screen.getByRole("button", { name: "Status" });
