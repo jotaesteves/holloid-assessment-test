@@ -86,7 +86,7 @@ const RobotCard = ({ robot }: RobotCardProps) => {
             onClick={() => {
               // Change status on click
               const newStatus = changeRobotStatus(robot.status);
-              updateRobotStatus?.(robot.robotId, newStatus);
+              updateRobotStatus(robot.robotId, newStatus);
             }}
             cursor="pointer"
             transition="background-color 0.2s, color 0.2s"
