@@ -7,6 +7,12 @@ on:
   push:
     branches: [main, develop]
 
+# Permissions for coverage reporting
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
+
 jobs:
   test:
     name: Run Tests

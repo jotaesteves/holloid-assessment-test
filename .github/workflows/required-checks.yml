@@ -5,6 +5,11 @@ on:
     branches: [main]
     types: [opened, synchronize, reopened]
 
+# Permissions for required checks
+permissions:
+  contents: read
+  checks: write
+
 # This workflow contains the minimum required checks for PR approval
 jobs:
   required-checks:
