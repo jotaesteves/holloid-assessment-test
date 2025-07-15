@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState, type ReactNode } from "react";
-import type { Robot, RobotStatus } from "../types/robot";
+import React, { createContext, useContext, useState, type ReactNode } from 'react';
+import type { Robot, RobotStatus } from '../types/robot';
 
 interface RobotContextType {
   robots: Robot[];
@@ -20,23 +20,27 @@ export const RobotProvider: React.FC<RobotProviderProps> = ({ children, initialR
   const [robots, setRobots] = useState<Robot[]>(initialRobots);
 
   const updateBatteryLevel = (robotId: string, newLevel: number) => {
-    setRobots((prevRobots) =>
-      prevRobots.map((robot) =>
-        robot.robotId === robotId ? { ...robot, batteryLevel: Math.max(0, Math.min(100, newLevel)) } : robot
+    setRobots(prevRobots =>
+      prevRobots.map(robot =>
+        robot.robotId === robotId
+          ? { ...robot, batteryLevel: Math.max(0, Math.min(100, newLevel)) }
+          : robot
       )
     );
   };
 
   const returnRobotToBase = (robotId: string) => {
-    setRobots((prevRobots) =>
-      prevRobots.map((robot) => (robot.robotId === robotId ? { ...robot, status: "Returning" as const } : robot))
+    setRobots(prevRobots =>
+      prevRobots.map(robot =>
+        robot.robotId === robotId ? { ...robot, status: 'Returning' as const } : robot
+      )
     );
   };
 
   const updateRobotStatus = (robotId: string, newStatus: RobotStatus) => {
-    setRobots((prevRobots) =>
-      prevRobots.map((robot) =>
-        robot.robotId === robotId ? { ...robot, status: newStatus as Robot["status"] } : robot
+    setRobots(prevRobots =>
+      prevRobots.map(robot =>
+        robot.robotId === robotId ? { ...robot, status: newStatus as Robot['status'] } : robot
       )
     );
   };
@@ -55,7 +59,7 @@ export const RobotProvider: React.FC<RobotProviderProps> = ({ children, initialR
 export const useRobotContext = () => {
   const context = useContext(RobotContext);
   if (context === undefined) {
-    throw new Error("useRobotContext must be used within a RobotProvider");
+    throw new Error('useRobotContext must be used within a RobotProvider');
   }
   return context;
 };

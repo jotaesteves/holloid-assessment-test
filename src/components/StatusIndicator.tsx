@@ -1,5 +1,5 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
-import type { RobotStatus } from "../types/robot";
+import { Box, Flex, Text } from '@chakra-ui/react';
+import type { RobotStatus } from '../types/robot';
 
 interface StatusIndicatorProps {
   status: RobotStatus;
@@ -8,71 +8,71 @@ interface StatusIndicatorProps {
 const StatusIndicator = ({ status }: StatusIndicatorProps) => {
   const getStatusConfig = (status: RobotStatus) => {
     switch (status) {
-      case "Idle":
+      case 'Idle':
         return {
-          bg: "green.50",
-          bgDark: "green.900",
-          borderColor: "green.200",
-          borderColorDark: "green.600",
-          icon: "🤖",
-          iconColor: "green.600",
-          iconColorDark: "green.300",
-          title: "Robot Ready",
-          titleColor: "green.800",
-          titleColorDark: "green.200",
-          description: "Waiting for next assignment",
-          descriptionColor: "green.600",
-          descriptionColorDark: "green.300",
+          bg: 'green.50',
+          bgDark: 'green.900',
+          borderColor: 'green.200',
+          borderColorDark: 'green.600',
+          icon: '🤖',
+          iconColor: 'green.600',
+          iconColorDark: 'green.300',
+          title: 'Robot Ready',
+          titleColor: 'green.800',
+          titleColorDark: 'green.200',
+          description: 'Waiting for next assignment',
+          descriptionColor: 'green.600',
+          descriptionColorDark: 'green.300',
         };
-      case "Error":
+      case 'Error':
         return {
-          bg: "red.50",
-          bgDark: "red.900",
-          borderColor: "red.200",
-          borderColorDark: "red.600",
-          icon: "⚠️",
-          iconColor: "red.600",
-          iconColorDark: "red.300",
-          title: "System Error",
-          titleColor: "red.800",
-          titleColorDark: "red.200",
-          description: "Requires maintenance attention",
-          descriptionColor: "red.600",
-          descriptionColorDark: "red.300",
+          bg: 'red.50',
+          bgDark: 'red.900',
+          borderColor: 'red.200',
+          borderColorDark: 'red.600',
+          icon: '⚠️',
+          iconColor: 'red.600',
+          iconColorDark: 'red.300',
+          title: 'System Error',
+          titleColor: 'red.800',
+          titleColorDark: 'red.200',
+          description: 'Requires maintenance attention',
+          descriptionColor: 'red.600',
+          descriptionColorDark: 'red.300',
         };
-      case "Charging":
+      case 'Charging':
         return {
-          bg: "purple.50",
-          bgDark: "purple.900",
-          borderColor: "purple.200",
-          borderColorDark: "purple.600",
-          icon: "🔋",
-          iconColor: "purple.600",
-          iconColorDark: "purple.300",
-          title: "Charging",
-          titleColor: "purple.800",
-          titleColorDark: "purple.200",
-          description: "Battery recharging in progress",
-          descriptionColor: "purple.600",
-          descriptionColorDark: "purple.300",
+          bg: 'purple.50',
+          bgDark: 'purple.900',
+          borderColor: 'purple.200',
+          borderColorDark: 'purple.600',
+          icon: '🔋',
+          iconColor: 'purple.600',
+          iconColorDark: 'purple.300',
+          title: 'Charging',
+          titleColor: 'purple.800',
+          titleColorDark: 'purple.200',
+          description: 'Battery recharging in progress',
+          descriptionColor: 'purple.600',
+          descriptionColorDark: 'purple.300',
         };
-      case "Returning":
+      case 'Returning':
         return {
-          bg: "orange.50",
-          bgDark: "orange.900",
-          borderColor: "orange.200",
-          borderColorDark: "orange.600",
-          icon: "🏠",
-          iconColor: "orange.600",
-          iconColorDark: "orange.300",
-          title: "Returning to Base",
-          titleColor: "orange.800",
-          titleColorDark: "orange.200",
-          description: "Heading back to charging station",
-          descriptionColor: "orange.600",
-          descriptionColorDark: "orange.300",
+          bg: 'orange.50',
+          bgDark: 'orange.900',
+          borderColor: 'orange.200',
+          borderColorDark: 'orange.600',
+          icon: '🏠',
+          iconColor: 'orange.600',
+          iconColorDark: 'orange.300',
+          title: 'Returning to Base',
+          titleColor: 'orange.800',
+          titleColorDark: 'orange.200',
+          description: 'Heading back to charging station',
+          descriptionColor: 'orange.600',
+          descriptionColorDark: 'orange.300',
         };
-      case "On Delivery":
+      /* case "On Delivery":
         return {
           bg: "blue.50",
           bgDark: "blue.900",
@@ -87,7 +87,7 @@ const StatusIndicator = ({ status }: StatusIndicatorProps) => {
           description: "Delivering order to customer",
           descriptionColor: "blue.600",
           descriptionColorDark: "blue.300",
-        };
+        }; */
       default:
         return null;
     }
@@ -119,7 +119,13 @@ const StatusIndicator = ({ status }: StatusIndicatorProps) => {
         >
           {config.icon}
         </Box>
-        <Text fontSize="sm" fontWeight="bold" color={config.titleColor} _dark={{ color: config.titleColorDark }} mb={1}>
+        <Text
+          fontSize="sm"
+          fontWeight="bold"
+          color={config.titleColor}
+          _dark={{ color: config.titleColorDark }}
+          mb={1}
+        >
           {config.title}
         </Text>
         <Text

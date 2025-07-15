@@ -1,16 +1,16 @@
-import { Box, Button, Flex, Heading, Text, Badge } from "@chakra-ui/react";
-import type { Robot, RobotStatus } from "../types/robot";
-import { getStatusColor, getBatteryColor } from "../utils/get-colors";
-import { useRobotContext } from "../contexts/RobotContext";
-import DeliveryDetails from "./DeliveryDetails";
-import StatusIndicator from "./StatusIndicator";
+import { Box, Button, Flex, Heading, Text, Badge } from '@chakra-ui/react';
+import type { Robot, RobotStatus } from '../types/robot';
+import { getStatusColor, getBatteryColor } from '../utils/get-colors';
+import { useRobotContext } from '../contexts/RobotContext';
+import DeliveryDetails from './DeliveryDetails';
+import StatusIndicator from './StatusIndicator';
 
 interface RobotCardProps {
   robot: Robot;
 }
 
 const changeRobotStatus = (status: RobotStatus) => {
-  const statuses: RobotStatus[] = ["Idle", "On Delivery", "Charging", "Error", "Returning"];
+  const statuses: RobotStatus[] = ['Idle', 'On Delivery', 'Charging', 'Error', 'Returning'];
   const currentIndex = statuses.indexOf(status);
   const nextIndex = (currentIndex + 1) % statuses.length;
   return statuses[nextIndex];
@@ -20,30 +20,30 @@ const RobotCard = ({ robot }: RobotCardProps) => {
   const { updateBatteryLevel, returnRobotToBase, updateRobotStatus } = useRobotContext();
 
   // Determine if button should be active and get appropriate label
-  const canReturnToBase = robot.status === "Idle" || robot.status === "On Delivery";
-  const isReturning = robot.status === "Returning";
+  const canReturnToBase = robot.status === 'Idle' || robot.status === 'On Delivery';
+  const isReturning = robot.status === 'Returning';
 
   const getButtonLabel = () => {
     switch (robot.status) {
-      case "Returning":
-        return "Returning to Base...";
-      case "Charging":
-        return "Currently Charging";
-      case "Error":
-        return "Error - Cannot Return";
-      case "On Delivery":
-        return "Recall from Delivery";
-      case "Idle":
-        return "Return to Base";
+      case 'Returning':
+        return 'Returning to Base...';
+      case 'Charging':
+        return 'Currently Charging';
+      case 'Error':
+        return 'Error - Cannot Return';
+      case 'On Delivery':
+        return 'Recall from Delivery';
+      case 'Idle':
+        return 'Return to Base';
       default:
-        return "Return to Base";
+        return 'Return to Base';
     }
   };
 
   return (
     <Box
       bg="white"
-      _dark={{ bg: "gray.800" }}
+      _dark={{ bg: 'gray.800' }}
       backdropFilter="blur(10px)"
       borderRadius="xl"
       boxShadow="lg"
@@ -53,8 +53,8 @@ const RobotCard = ({ robot }: RobotCardProps) => {
       flexDirection="column"
       transition="all 0.3s"
       _hover={{
-        boxShadow: "2xl",
-        transform: "translateY(-4px)",
+        boxShadow: '2xl',
+        transform: 'translateY(-4px)',
       }}
       role="article"
       aria-label={`Robot ${robot.robotId} status card`}
@@ -63,10 +63,10 @@ const RobotCard = ({ robot }: RobotCardProps) => {
         {/* Robot ID, Model, and Status */}
         <Flex justify="space-between" align="flex-start" mb={4}>
           <Box>
-            <Heading as="h2" size="lg" color="gray.900" _dark={{ color: "white" }} mb={1}>
+            <Heading as="h2" size="lg" color="gray.900" _dark={{ color: 'white' }} mb={1}>
               {robot.robotId} – {robot.name}
             </Heading>
-            <Text fontSize="md" color="gray.600" _dark={{ color: "gray.400" }} fontWeight="medium">
+            <Text fontSize="md" color="gray.600" _dark={{ color: 'gray.400' }} fontWeight="medium">
               Model: {robot.model}
             </Text>
           </Box>
@@ -111,7 +111,7 @@ const RobotCard = ({ robot }: RobotCardProps) => {
       {/* Battery Level Indicator */}
       <Box mb={4}>
         <Flex align="center" justify="space-between" mb={2}>
-          <Text fontSize="sm" fontWeight="medium" color="gray.600" _dark={{ color: "gray.400" }}>
+          <Text fontSize="sm" fontWeight="medium" color="gray.600" _dark={{ color: 'gray.400' }}>
             Battery Level
           </Text>
           <Flex align="center">
@@ -129,7 +129,7 @@ const RobotCard = ({ robot }: RobotCardProps) => {
             <Text
               fontSize="sm"
               color="gray.600"
-              _dark={{ color: "gray.400" }}
+              _dark={{ color: 'gray.400' }}
               fontWeight="bold"
               minW="32px"
               textAlign="center"
@@ -154,7 +154,7 @@ const RobotCard = ({ robot }: RobotCardProps) => {
             width="100%"
             height="8px"
             bg="gray.200"
-            _dark={{ bg: "gray.600" }}
+            _dark={{ bg: 'gray.600' }}
             borderRadius="full"
             overflow="hidden"
             role="progressbar"
@@ -187,8 +187,8 @@ const RobotCard = ({ robot }: RobotCardProps) => {
             isReturning
               ? `Robot ${robot.robotId} is returning to base`
               : canReturnToBase
-              ? `Send robot ${robot.robotId} back to base`
-              : `Cannot return robot ${robot.robotId} to base - current status: ${robot.status}`
+                ? `Send robot ${robot.robotId} back to base`
+                : `Cannot return robot ${robot.robotId} to base - current status: ${robot.status}`
           }
         >
           {getButtonLabel()}
