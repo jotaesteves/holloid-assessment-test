@@ -1,0 +1,15 @@
+# Ignore files for Prettier formatting
+node_modules
+dist
+coverage
+build
+*.min.js
+*.map
+.vscode
+.git
+.env*
+*.log
+*.pid
+*.seed
+*.tmp
+public

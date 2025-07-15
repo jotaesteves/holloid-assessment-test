@@ -15,7 +15,7 @@
 }
 
 html.dark,
-[data-theme="dark"] {
+[data-theme='dark'] {
   --chakra-colors-bg: #1a202c;
   --chakra-colors-text: #ffffff;
   --chakra-colors-card-bg: #2d3748;
@@ -34,7 +34,9 @@ html.dark,
 body {
   background-color: var(--chakra-colors-bg) !important;
   color: var(--chakra-colors-text) !important;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 /* Theme-aware component styles */
@@ -63,17 +65,32 @@ body {
 
 /* Dark theme specific background gradients */
 html.dark .app-background,
-[data-theme="dark"] .app-background {
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 25%, #1e1e1e 50%, #2a2a2a 100%) !important;
+[data-theme='dark'] .app-background {
+  background: linear-gradient(
+    135deg,
+    #1a1a1a 0%,
+    #2d2d2d 25%,
+    #1e1e1e 50%,
+    #2a2a2a 100%
+  ) !important;
 }
 
 html.light .app-background,
-[data-theme="light"] .app-background,
+[data-theme='light'] .app-background,
 .app-background {
-  background: linear-gradient(135deg, #e2e2e2 0%, #dbdbdb 25%, #eeeeee 50%, #e1e1e1 100%) !important;
+  background: linear-gradient(
+    135deg,
+    #e2e2e2 0%,
+    #dbdbdb 25%,
+    #eeeeee 50%,
+    #e1e1e1 100%
+  ) !important;
 }
 
 /* Force theme updates on all elements */
 * {
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease !important;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease !important;
 }
